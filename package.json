@@ -1,0 +1,15 @@
+{
+  "author": "David Wilhelm <dewilhelm@gmail.com>",
+  "name": "extjs4ctags",
+  "description": "generates ctags from Ext JS 4 source code",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bigfish/extjs4ctags.git"
+  },
+  "engines": {
+    "node": "~v0.4.1"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
