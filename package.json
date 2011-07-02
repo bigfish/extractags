@@ -11,5 +11,7 @@
     "node": "~v0.4.1"
   },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+	"jessie": "v0.3.7"
+	}
 }
