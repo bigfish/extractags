@@ -1,1 +1,32 @@
-Under construction...
+A utility for parsing Ext JS 4 source code into CTags format for use in editors.
+
+###Usage:
+
+With node installed, you can run the following command from the extjs4ctags directory
+
+	./bin/extags.js path/to/src/dir
+
+And it will output the ctags to stdout.
+
+###Status: incomplete
+
+Done:
+
+* get all the .js files in given directory, and parse
+* parse class name
+* setup BDD with jasmine
+
+ToDo:
+
+* parse other members of classes
+* output CTags format
+
+### Tests
+
+To run the tests, install jasmine-node and run
+
+	jasmine-node --coffee .
+
+in the extjs4ctags dir.
+
+

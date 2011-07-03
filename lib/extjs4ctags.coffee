@@ -1,3 +1,4 @@
+fs = require 'fs'
 pending = 0
 classes = []
 onComplete = null
@@ -17,9 +18,9 @@ findFilesInDir = (dir, callback) ->
 						else if stats.isDirectory
 							findFilesInDir filePath, callback
 
-parseText = (fileText) ->
+parseText = (fileStr) ->
 	cur_class = {}
-	lines = fileText.split '\n'
+	lines = fileStr.split '\n'
 	for line in lines
 		do (line) ->
 
@@ -35,22 +36,20 @@ parseText = (fileText) ->
 
 	return cur_class
 
-parseFile = (file) ->
-	fs.readFile file, 'utf8', (err, fileText) ->
-		throw err if err
 
-		cur_class = parse fileText
-
-		#add parsed class data object to collection
-		if cur_class.fullClassName
-			classes.push cur_class
-
-		#decrement the count of pending flags
-		pending--
-
-		#if it is 0 we are all done -- output the stats
-		if pending is 0
-			onComplete classes
+parseFile = (file, callback) ->
+    fs.readFile file, 'utf8', (err, fileText) ->
+        if err
+            callback err
+        classObj = parseText fileText
+        if classObj.fullClassName
+            classes.push classObj
+        #decrement the count of pending flags
+        pending--
+        #if it is 0 we are all done -- output the stats
+        if pending is 0
+            unless onComplete is null
+                onComplete null, classes
 
 outputCTags = (classes) ->
 	for classObj in classes
@@ -62,12 +61,15 @@ parseDir = (topdir, callback) ->
 	classes = []
 	pending = 0
 	findFilesInDir topdir, (err, file) ->
-		throw err if err
-		if file.match /\.js$/
-			pending++
-			parseFile file, callback
-		
+        debugger
+        callback err if err
+        if file and file.match /\.js$/
+            pending++
+            parseFile file, callback
+
+exports.findFilesInDir = findFilesInDir
 exports.parseDir = parseDir
+exports.parseFile = parseFile
 exports.parseText = parseText
 
 			

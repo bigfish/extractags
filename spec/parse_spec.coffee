@@ -6,13 +6,37 @@ describe "generate ctags", ->
 				
 		});
 	"""
-	beforeEach = ->
-		extags = require '../extjs4ctags.coffee'
+	# beforeEach = ->
 
 	it 'should parse the class name', ->
+		extags = require '../lib/extjs4ctags.coffee'
 		parsed_class = extags.parseText fileText
-		parsed_class.fullClassName.should_equal "some.Class"
+		expect(parsed_class.fullClassName).toBe("some.Class")
+	
+	it 'should parse a directory', ->
+		debugger
+		extags = require '../lib/extjs4ctags.coffee'
+		#setup
+		parsedClasses = null
+		err = null
+		parseComplete = false
 
+		#exercise
+		extags.parseDir './spec/testfiles', (err, classes) ->
+			err = err
+			parsedClasses = classes
+			parseComplete = true
+
+
+		waitsFor ->
+			return parseComplete
+		, "parsing did not complete", 1000
+		
+		runs ->
+			expect(err).toBe(null)
+			expect(parsedClasses).toNotBe(null)
+
+		return null
 
 
 
