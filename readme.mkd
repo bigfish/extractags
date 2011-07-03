@@ -8,6 +8,13 @@ With node installed, you can run the following command from the extjs4ctags dire
 
 And it will output the ctags to stdout.
 
+###Runtime Dependencies
+* NodeJS
+
+###Development Dependencies
+* CoffeeScript
+* node-jasmine
+
 ###Status: incomplete
 
 Done:
@@ -21,11 +28,19 @@ ToDo:
 * parse other members of classes
 * output CTags format
 
+### Build
+
+	cake build
+
 ### Tests
 
 To run the tests, install jasmine-node and run
 
 	jasmine-node --coffee .
+
+Or, assuming you have npm installed CoffeeScript:
+	
+	cake test
 
 in the extjs4ctags dir.
 
