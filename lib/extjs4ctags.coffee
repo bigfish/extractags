@@ -1,22 +1,9 @@
 fs = require 'fs'
+finder = require './utils/finder'
 pending = 0
 classes = []
 onComplete = null
 
-findFilesInDir = (dir, callback) ->
-	fs.stat dir, (err, stats) ->
-		callback err if err
-		fs.readdir dir, (err, files) ->
-			callback err if err
-			for file in files
-				do (file) ->
-					filePath = dir + "/" + file
-					fs.stat filePath, (err, stats) ->
-						callback err if err
-						if stats.isFile()
-							callback null, filePath
-						else if stats.isDirectory
-							findFilesInDir filePath, callback
 
 parseText = (fileStr) ->
 	cur_class = {}
@@ -60,14 +47,12 @@ parseDir = (topdir, callback) ->
 	#reset state
 	classes = []
 	pending = 0
-	findFilesInDir topdir, (err, file) ->
-        debugger
+	finder.find topdir, (err, file) ->
         callback err if err
         if file and file.match /\.js$/
             pending++
             parseFile file, callback
 
-exports.findFilesInDir = findFilesInDir
 exports.parseDir = parseDir
 exports.parseFile = parseFile
 exports.parseText = parseText

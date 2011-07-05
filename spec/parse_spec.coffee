@@ -1,4 +1,4 @@
-describe "generate ctags", ->
+describe "parse Ext JS 4 source files", ->
 
 	extags = null
 	fileText = """

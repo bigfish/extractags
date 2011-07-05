@@ -25,7 +25,19 @@ Done:
 
 ToDo:
 
-* parse other members of classes
+* refactor findFilesInDir into utils submodule
+* write specs for findFilesInDir, it should:
+	- find all files below dir
+	- throw error if argument not a dir
+	- filter on given regexp
+* cli script should parse file or folder recursively, depending on argument given to script
+* write specs for parsing a single file:
+* parse superclass
+* parse methods
+* parse mixins
+* parse properties
+* parse config
+* ensure only parsing top level methods & properties
 * output CTags format
 
 ### Build
