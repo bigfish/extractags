@@ -9,13 +9,12 @@ describe "parse Ext JS 4 source files", ->
 	# beforeEach = ->
 
 	it 'should parse the class name', ->
-		extags = require '../lib/extjs4ctags.coffee'
+		extags = require '../src/extjs4ctags.coffee'
 		parsed_class = extags.parseText fileText
 		expect(parsed_class.fullClassName).toBe("some.Class")
 	
 	it 'should parse a directory', ->
-		debugger
-		extags = require '../lib/extjs4ctags.coffee'
+		extags = require '../src/extjs4ctags.coffee'
 		#setup
 		parsedClasses = null
 		err = null
