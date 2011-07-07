@@ -3,7 +3,8 @@
 #with the filepath as argument
 fs = require 'fs'
 pending = 0
-find = (dir, callback) ->
+find = (dir, fileRE = /.*/, callback) ->
+  debugger
   fs.stat dir, (err, stats) ->
     throw err if err
     fs.readdir dir, (err, files) ->
@@ -16,8 +17,10 @@ find = (dir, callback) ->
             throw err if err
             pending--
             if stats.isFile()
-              callback null, filePath, pending is 0
+              debugger
+              if fileRE.test file
+                callback null, filePath, pending is 0
             else if stats.isDirectory()
-              find filePath, callback
+              find filePath, fileRE, callback
 
 exports.find = find

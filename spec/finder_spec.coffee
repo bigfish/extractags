@@ -4,7 +4,7 @@ describe "file finder finds files", ->
     foundFile = false
     error = null
     fileFound = null
-    finder.find './spec/testfiles', (err, file) ->
+    finder.find './spec/testfiles', null, (err, file) ->
       foundFile = true
       error = err
       fileFound = file
@@ -13,14 +13,12 @@ describe "file finder finds files", ->
     , "find did not find anything after a second", 1000
     runs ->
       expect(fileFound).toBeDefined
-    return null
 
   it "should pass the 'finished' argument when finished finding", ->
     finder = require '../src/utils/finder'
     find_finished = false
     found_files = []
-    finder.find './spec/testfiles', (err, file, finished) ->
-      debugger
+    finder.find './spec/testfiles', null,  (err, file, finished) ->
       error = err
       found_files.push file
       find_finished = finished
@@ -29,6 +27,20 @@ describe "file finder finds files", ->
     , "find did not finish after a second", 1000
     runs ->
       expect(found_files.length).toBe(4)
-    return null
+
+  it "should filter files", ->
+    finder = require '../src/utils/finder'
+    find_finished = false
+    found_files = []
+    finder.find './spec/testfiles', /\.js$/, (err, file, finished) ->
+      debugger
+      error = err
+      found_files.push file
+      find_finished = finished
+    waitsFor ->
+      find_finished
+    , "find did not finish after a second", 1000
+    runs ->
+      expect(found_files.length).toBe(3)
 
 

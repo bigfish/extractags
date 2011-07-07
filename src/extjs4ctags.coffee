@@ -47,9 +47,9 @@ parseDir = (topdir, callback) ->
 	#reset state
 	classes = []
 	pending = 0
-	finder.find topdir, (err, file) ->
+	finder.find topdir, /\.js$/, (err, file) ->
         callback err if err
-        if file and file.match /\.js$/
+        if file
             pending++
             parseFile file, callback
 
