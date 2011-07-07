@@ -28,7 +28,10 @@ parseFile = (file, callback) ->
   fs.readFile file, 'utf8', (err, fileText) ->
     throw err if err
     classObj = parseText fileText
-    callback classObj
+    if classObj
+      callback null, classObj
+    else
+      callback "unable to parse file: #{file}"
 
 outputCTags = (classes) ->
   for classObj in classes
@@ -40,9 +43,11 @@ parseDir = (topdir, callback) ->
   classes = []
   pending = 0
   finder.find topdir, /\.js$/, (err, file, finished) ->
+    debugger
     throw err if err
     if file
-      parseFile file, (classObj) ->
+      parseFile file, (err, classObj) ->
+        throw err if err
         classes.push classObj
         if finished
           callback null, classes

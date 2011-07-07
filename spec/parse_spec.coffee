@@ -34,12 +34,14 @@ describe "parse Ext JS 4 source files", ->
       expect(parsedClasses).toNotBe(null)
       expect(parsedClasses.length).toBe(3)
       expect(parsedClasses[0].fullClassName).toBe("life.Animal")
+      expect(parsedClasses[1].fullClassName).toBe("life.cats.Tiger")
 
   it 'should parse a file', ->
     extags = require '../src/extjs4ctags'
     parsed = false
     parsed_data = null
-    parsed_file = extags.parseFile './spec/testfiles/Animal.js', (classObj) ->
+    parsed_file = extags.parseFile './spec/testfiles/Animal.js', (err, classObj) ->
+      throw err if err
       parsed = true
       parsed_data = classObj
     waitsFor ->

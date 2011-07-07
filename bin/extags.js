@@ -10,7 +10,18 @@
     }
     topdir = args.pop();
     parser = require("../lib/extjs4ctags");
-    classes = parser.parseDir(topdir, function (err, classes) {
-        console.dir(classes);
+    fs.stat(topdir, function (err, stats) {
+        if (err) {
+            throw (err)
+        }
+        if (stats.isFile()) {
+            parser.parseFile(topdir, function (classData) {
+                console.dir(classData);
+            });
+        } else if (stats.isDirectory) {
+            parser.parseDir(topdir, function (err, classes) {
+                console.dir(classes);
+            });
+        }
     });
 }).call(this);
