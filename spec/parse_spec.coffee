@@ -9,7 +9,7 @@ describe "parse Ext JS 4 source files", ->
 	# beforeEach = ->
 
 	it 'should parse the class name', ->
-		extags = require '../src/extjs4ctags.coffee'
+		extags = require '../src/extjs4ctags'
 		parsed_class = extags.parseText fileText
 		expect(parsed_class.fullClassName).toBe("some.Class")
 	
@@ -26,14 +26,14 @@ describe "parse Ext JS 4 source files", ->
 			parsedClasses = classes
 			parseComplete = true
 
-
 		waitsFor ->
-			return parseComplete
+			parseComplete
 		, "parsing did not complete", 1000
 		
 		runs ->
 			expect(err).toBe(null)
 			expect(parsedClasses).toNotBe(null)
+			expect(parsedClasses.length).toBe(3)
 
 		return null
 

@@ -33,7 +33,6 @@ describe "file finder finds files", ->
     find_finished = false
     found_files = []
     finder.find './spec/testfiles', /\.js$/, (err, file, finished) ->
-      debugger
       error = err
       found_files.push file
       find_finished = finished
