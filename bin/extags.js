@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+/*jslint node:true */
 (function () {
     var args, classes, fs, parser, topdir;
     fs = require('fs');
@@ -12,10 +13,10 @@
     parser = require("../lib/extjs4ctags");
     fs.stat(topdir, function (err, stats) {
         if (err) {
-            throw (err)
+            throw (err);
         }
         if (stats.isFile()) {
-            parser.parseFile(topdir, function (classData) {
+            parser.parseFile(topdir, function (err, classData) {
                 console.dir(classData);
             });
         } else if (stats.isDirectory) {
@@ -24,4 +25,4 @@
             });
         }
     });
-}).call(this);
+}());
