@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-/*jslint node:true */
+//delegate to cli.js to make testing and debugging easier
 cli = require('../lib/cli/cli.js');
 cli();
