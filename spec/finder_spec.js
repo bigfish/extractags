@@ -4,7 +4,7 @@
     describe("file finder finds files", function () {
         it("should find all files in a directory", function () {
             var error, fileFound, finder, foundFile;
-            finder = require('../lib/utils/finder');
+            finder = require('../lib/finder');
             foundFile = false;
             error = null;
             fileFound = null;
@@ -22,7 +22,7 @@
         });
         it("should pass the 'finished' argument when finished finding", function () {
             var find_finished, finder, found_files;
-            finder = require('../lib/utils/finder');
+            finder = require('../lib/finder');
             find_finished = false;
             found_files = [];
             finder.find('./spec/testfiles', null, function (err, file, finished) {
@@ -40,7 +40,7 @@
         });
         return it("should filter files", function () {
             var find_finished, finder, found_files;
-            finder = require('../lib/utils/finder');
+            finder = require('../lib/finder');
             find_finished = false;
             found_files = [];
             finder.find('./spec/testfiles', /\.js$/, function (err, file, finished) {
