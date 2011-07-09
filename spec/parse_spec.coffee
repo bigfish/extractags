@@ -10,7 +10,10 @@ describe "parse Ext JS 4 source files", ->
     extags = require '../src/extjs4ctags'
     parsed_class = extags.parseText fileText
     expect(parsed_class.fullClassName).toBe("some.Class")
-  
+  #todo --> parse superclass
+  #todo --> parse methods
+  #todo --> parse properties
+  #todo --> parse mixins
   it 'should parse a directory', ->
     #setup
     extags = require '../src/extjs4ctags'
