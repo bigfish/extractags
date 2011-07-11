@@ -48,7 +48,7 @@
             });
         });
 
-        it('should output ctags with the symbols exported by a file', function () {
+        it('should output a tag for the class which is defined in a file', function () {
             var parsed, generatedCTags, parsed_file, TAB = "\t";
             main = require('../lib/main');
             parsed = false;
