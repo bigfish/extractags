@@ -61,7 +61,7 @@
                 return parsed;
             });
             return runs(function () {
-                expect(generatedCTags[0]).toBe('life.Animal\t./spec/testfiles/Animal.js\t/^Ext.define("life.Animal", {$/;"');
+                expect(generatedCTags[0]).toBe('life.Animal\t./spec/testfiles/Animal.js\t/^Ext.define("life.Animal", {$/;"\tc');
             });
         });
 
