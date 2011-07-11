@@ -61,7 +61,7 @@
                 return parsed;
             });
             return runs(function () {
-                expect(generatedCTags).toBe('CTAG');
+                expect(generatedCTags[0]).toBe('life.Animal');
             });
         });
     });
