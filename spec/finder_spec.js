@@ -35,7 +35,7 @@
                 return find_finished;
             }, "find did not finish after a second", 1000);
             return runs(function () {
-                expect(found_files.length).toBe(4);
+                expect(found_files.length).toBe(5);
             });
         });
         return it("should filter files", function () {
@@ -53,7 +53,7 @@
                 return find_finished;
             }, "find did not finish after a second", 1000);
             return runs(function () {
-                expect(found_files.length).toBe(3);
+                expect(found_files.length).toBe(4);
             });
         });
     });
