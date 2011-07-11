@@ -49,7 +49,7 @@
         });
 
         it('should output ctags with the symbols exported by a file', function () {
-            var parsed, generatedCTags, parsed_file;
+            var parsed, generatedCTags, parsed_file, TAB = "\t";
             main = require('../lib/main');
             parsed = false;
             generatedCTags = null;
@@ -61,7 +61,7 @@
                 return parsed;
             });
             return runs(function () {
-                expect(generatedCTags[0]).toBe('life.Animal');
+                expect(generatedCTags[0]).toBe('life.Animal\t./spec/testfiles/Animal.js');
             });
         });
     });
