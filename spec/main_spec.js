@@ -64,5 +64,24 @@
                 expect(generatedCTags[0]).toBe('life.Animal\t./spec/testfiles/Animal.js\t/^Ext.define("life.Animal", {$/;');
             });
         });
+
+        it('should output no tags when given a file without an Ext.define declaration', function () {
+            var parsed, generatedCTags, parsed_file, TAB = "\t";
+            main = require('../lib/main');
+            parsed = false;
+            generatedCTags = null;
+            parsed_file = main.genCTags('./spec/testfiles/dogs/Greyhound.js', function (ctags) {
+                parsed = true;
+                generatedCTags = ctags;
+            });
+            waitsFor(function () {
+                return parsed;
+            });
+            return runs(function () {
+
+                expect(generatedCTags.length).toBe(0);
+            });
+
+        });
     });
 }());
