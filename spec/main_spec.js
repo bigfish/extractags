@@ -84,5 +84,22 @@
             });
 
         });
+        it('should output a tag for the constructor function which is defined in a file', function () {
+            var parsed, generatedCTags, parsed_file, TAB = "\t";
+            main = require('../lib/main');
+            parsed = false;
+            generatedCTags = null;
+            parsed_file = main.genCTags('./spec/testfiles/Animal.js', function (ctags) {
+                parsed = true;
+                generatedCTags = ctags;
+            });
+            waitsFor(function () {
+                return parsed;
+            });
+            return runs(function () {
+                expect(generatedCTags[1]).toBe('life.Animal\t./spec/testfiles/Animal.js\t/^    constructor: function (name) {$/;"\tf');
+            });
+        });
+
     });
 }());
