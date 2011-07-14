@@ -44,7 +44,7 @@
             waitsFor(function () {
                 return parsed;
             });
-            return runs(function () {
+            runs(function () {
                 expect(parsed_data.fullClassName).toBe('life.Animal');
             });
         });
@@ -61,7 +61,7 @@
             waitsFor(function () {
                 return parsed;
             });
-            return runs(function () {
+            runs(function () {
                 expect(generatedCTags[0]).toBe('Animal\t./spec/testfiles/Animal.js\t/^Ext.define("life.Animal", {$/;"\tc');
             });
         });
@@ -78,7 +78,7 @@
             waitsFor(function () {
                 return parsed;
             });
-            return runs(function () {
+            runs(function () {
 
                 expect(generatedCTags.length).toBe(0);
             });
@@ -96,7 +96,7 @@
             waitsFor(function () {
                 return parsed;
             });
-            return runs(function () {
+            runs(function () {
                 expect(generatedCTags[1]).toBe('Animal\t./spec/testfiles/Animal.js\t/^    constructor: function (name) {$/;"\tf');
             });
         });
@@ -113,9 +113,27 @@
             waitsFor(function () {
                 return parsed;
             });
-            return runs(function () {
+            runs(function () {
                 expect(generatedCTags[2]).toBe('breathe\t./spec/testfiles/Animal.js\t/^    breathe: function () {$/;"\tf');
             });
+        });
+
+        it('should not output tags for code inside comments', function () {
+            var parsed, generatedCTags, parsed_file, TAB = "\t";
+            main = require('../lib/main');
+            parsed = false;
+            generatedCTags = null;
+            parsed_file = main.genCTags('./spec/testfiles/Vegetable.js', function (ctags) {
+                parsed = true;
+                generatedCTags = ctags;
+            });
+            waitsFor(function () {
+                return parsed;
+            });
+            runs(function () {
+                expect(generatedCTags.length).toBe(1);
+            });
+
         });
     });
 }());
