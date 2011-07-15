@@ -131,7 +131,7 @@
                 return parsed;
             });
             runs(function () {
-                expect(generatedCTags.length).toBe(1);
+                expect(generatedCTags.length).toBe(4);
             });
 
         });
@@ -149,7 +149,24 @@
                 return parsed;
             });
             runs(function () {
-                expect(generatedCTags.length).toBe(3);
+                expect(generatedCTags.length).toBe(4);
+            });
+        });
+
+        it('should output tags for properties of the class defined in the file)', function () {
+            var parsed, generatedCTags, parsed_file, TAB = "\t";
+            main = require('../lib/main');
+            parsed = false;
+            generatedCTags = null;
+            parsed_file = main.genCTags('./spec/testfiles/Vegetable.js', function (ctags) {
+                parsed = true;
+                generatedCTags = ctags;
+            });
+            waitsFor(function () {
+                return parsed;
+            });
+            runs(function () {
+                expect(generatedCTags.length).toBe(4);
             });
 
         });

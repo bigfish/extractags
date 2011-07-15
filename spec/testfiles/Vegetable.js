@@ -8,4 +8,11 @@ Ext.define('life.Vegetable', {
         
     }
     */
+    leaves: ['leaf1', 'leaf2'],
+    latinName: 'tomatus',
+    dna: {
+        a: 1,
+        b: 2,
+        c: 3
+    }
 });
