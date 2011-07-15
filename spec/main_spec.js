@@ -135,5 +135,24 @@
             });
 
         });
+
+        it('should not output tags for code inside object literals (other than the Ext.define() config object)', function () {
+            var parsed, generatedCTags, parsed_file, TAB = "\t";
+            main = require('../lib/main');
+            parsed = false;
+            generatedCTags = null;
+            parsed_file = main.genCTags('./spec/testfiles/Animal.js', function (ctags) {
+                parsed = true;
+                generatedCTags = ctags;
+            });
+            waitsFor(function () {
+                return parsed;
+            });
+            runs(function () {
+                expect(generatedCTags.length).toBe(3);
+            });
+
+        });
+
     });
 }());
