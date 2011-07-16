@@ -14,7 +14,9 @@ And it will output the ctags to stdout.
 ###Development Dependencies
 * node-jasmine
 
-###Status: incomplete
+###Progress
+
+- generates ctags to stdout
 
 Done:
 
@@ -35,7 +37,17 @@ Todo:
 * index static methods and properties
 * parse requires, mixins config options
 * parse all other config options
+* enable command line options to run immediately and exit, or
 * daemonize, watching given directory, & auto-generate tags
+
+* completion module:
+* autocomplete namespaces + class names + static members
+* this.xx autocompletion within class define scope
+* this.xx.yy autocompletion using type inference
+* native JavaScript object method/property autocompletion
+* method autocompletion with argument jump tags (snippets ?)
+* write Vim omnicomplete function to call extract autocomplete CLI method
+
 
 ### Tests
 
