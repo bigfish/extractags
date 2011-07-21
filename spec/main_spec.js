@@ -1,9 +1,10 @@
-/*jslint node:true */
+/*jslint node:true white:false*/
 /*global describe it expect waitsFor runs*/
 (function () {
     describe("parse Ext JS 4 source files", function () {
-        var main, fileText;
+        var main, fileText, fs;
         main = null;
+        fs = require('fs');
 
         it('should parse a directory', function () {
             var err, parseComplete, parsedClasses;
@@ -170,6 +171,39 @@
             });
 
         });
-
+/*
+        it('should regenerate tags when autoGenCTags is called', function () {
+            var parsed, generatedCTags, parsed_file, TAB = "\t";
+            main = require('../lib/main');
+            parsed = false;
+            generatedCTags = null;
+            parsed_file = main.autoGenCTags('./spec/test_watcher_files/adir', function (ctags) {
+                parsed = true;
+                generatedCTags = ctags;
+            });
+            waitsFor(function () {
+                return parsed;
+            });
+            runs(function () {
+                expect(generatedCTags.length).toBe(4);
+            });
+            //now lets check that when a file is changed, the tags are regenerated
+            //remove the file if it exists
+            fs.unlinkSync('./spec/test_watcher_files/adir/NewClass.js');
+            parsed = false;
+            waitsFor(function () {
+                return parsed;
+            });
+            //write the file which should trigger regeneration
+            fs.writeFileSync('./spec/test_watcher_files/adir/NewClass.js', [
+                "Ext.define('adir.NewClass', {"
+                , "})"].join("\n"), 'UTF-8');
+            runs(function () {
+                expect(generatedCTags.length).toBe(5);
+                //remove the file again
+                //fs.unlinkSync('./spec/test_watcher_files/adir/NewClass.js');
+            });
+        });
+*/
     });
 }());
