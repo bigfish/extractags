@@ -1,3 +1,1 @@
-Ext.define('life.cats.Tiger', {
-
-});
+Ext.define('life.cats.Tiger', {});
