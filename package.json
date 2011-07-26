@@ -1,15 +1,22 @@
 {
   "author": "David Wilhelm <dewilhelm@gmail.com>",
-  "name": "extjs4ctags",
+  "name": "extractags",
   "description": "generates ctags from Ext JS 4 source code",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "git://github.com/bigfish/extjs4ctags.git"
+    "url": "git://github.com/bigfish/extractags.git"
   },
+  "bin": {
+				"extractags": "./bin/extractags"
+	},
   "engines": {
-    "node": "~v0.4.1"
+    "node": ">0.4.1"
   },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": { "jasmine-node": "*"},
+  "scripts": {
+				"test": "jasmine-node ."
+		},
+	"preferGlobal": true
 }

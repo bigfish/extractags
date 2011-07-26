@@ -50,7 +50,11 @@
             fileChanged = undefined;
             watcher = require('../lib/watcher');
             //ensure the file to be created does not exist
-            //fs.unlinkSync(WATCH_FILE);
+            try {
+                fs.unlinkSync(WATCH_FILE);
+            } catch (e) {
+                //ignore failure to delete if not exist
+            }
             //watch dir
             watcher.watchFiles(WATCH_DIR, function (file, curr, prev) {
                 fileChanged = file;
@@ -79,7 +83,6 @@
             fs.writeFileSync('./spec/test_watcher_files/adir/someAnotherFile.txt', 'foo', 'UTF-8');
             //watch dir
             watcher.watchFiles('./spec/test_watcher_files/adir', function (file, curr, prev) {
-                console.log("file deleted");
                 fileChanged = file;
             });
             //delete file

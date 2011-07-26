@@ -1,22 +1,31 @@
 A utility for parsing Ext JS 4 source code into CTags format for use in editors.
 
+###Installation
+
+	sudo npm install -g extractags
+
 ###Usage:
 
-With node installed, you can run the following command from the extjs4ctags directory
+	extractags path/to/src/dir
 
-	./bin/extags.js path/to/src/dir
+Will output the ctags to stdout.
 
-And it will output the ctags to stdout.
+	extractags -o tags path/to/src/dir
+
+Will generate ctags in ./tags
+
+	extractags -o tags --watch path/to/src/dir
+
+Will generate ctags in ./tags, and update them automatically when files under the target
+dir are changed when files under the target dir are changed
 
 ###Runtime Dependencies
 * NodeJS
 
 ###Development Dependencies
-* node-jasmine
+* node-jasmine (BDD framework)
 
 ###Progress
-
-- generates ctags to stdout
 
 Done:
 
@@ -31,22 +40,21 @@ Done:
 * cli script should parse file or folder recursively, depending on argument given to script
 * ensure only parsing top level methods & properties
 * output CTags format
+* enable command line options to run immediately and exit, or daemonize, watching given directory, & auto-generate tags
 
 Todo: 
 
 * index static methods and properties
 * parse requires, mixins config options
 * parse all other config options
-* enable command line options to run immediately and exit, or
-* daemonize, watching given directory, & auto-generate tags
 
-* completion module:
+* autocompletion functionality:
 * autocomplete namespaces + class names + static members
 * this.xx autocompletion within class define scope
 * this.xx.yy autocompletion using type inference
 * native JavaScript object method/property autocompletion
 * method autocompletion with argument jump tags (snippets ?)
-* write Vim omnicomplete function to call extract autocomplete CLI method
+* write Vim omnicomplete function to call extractags autocomplete CLI method
 
 
 ### Tests
@@ -55,6 +63,6 @@ To run the tests, install jasmine-node and run
 
 	jasmine-node .
 
-in the extract dir.
+in the extractags dir.
 
 

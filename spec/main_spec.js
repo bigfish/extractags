@@ -25,9 +25,6 @@
                 expect(err).toBe(null);
                 expect(parsedClasses).toNotBe(null);
                 expect(parsedClasses.length).toBe(4);
-                expect(parsedClasses[0].fullClassName).toBe("life.Animal");
-                expect(parsedClasses[1].fullClassName).toBe("life.Vegetable");
-                expect(parsedClasses[2].fullClassName).toBe("life.cats.Tiger");
             });
         });
         it('should parse a file', function () {
