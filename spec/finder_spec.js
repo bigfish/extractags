@@ -63,6 +63,9 @@
             find_finished = false;
             found_files = [];
             finder.find('./spec/testfiles/', /\.js$/, function (err, file, finished) {
+                if (!file) {
+                    return;
+                }
                 var error;
                 error = err;
                 found_files.push(file);

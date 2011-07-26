@@ -20,7 +20,7 @@
             });
             waitsFor(function () {
                 return parseComplete;
-            }, "parsing did not complete", 1000);
+            }, "parsing did not complete", 3000);
             runs(function () {
                 expect(err).toBe(null);
                 expect(parsedClasses).toNotBe(null);
@@ -165,6 +165,24 @@
             });
             runs(function () {
                 expect(generatedCTags.length).toBe(4);
+            });
+
+        });
+
+        it("should parse a dir with only dirs in it", function () {
+            var parsed, generatedCTags, parsed_file, TAB = "\t";
+            main = require('../lib/main');
+            parsed = false;
+            generatedCTags = null;
+            parsed_file = main.genCTags('./spec/lib', function (ctags) {
+                parsed = true;
+                generatedCTags = ctags;
+            });
+            waitsFor(function () {
+                return parsed;
+            }, 1000);
+            runs(function () {
+                expect(generatedCTags.length).toBe(181);
             });
 
         });

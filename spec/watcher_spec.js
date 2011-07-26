@@ -1,9 +1,16 @@
 /*jslint node:true */
-/*global describe it expect waitsFor waits runs*/
+/*global describe it expect waitsFor afterEach waits runs*/
 (function () {
     var fs = require('fs');
-    describe("file watcher watches files", function () {
+    afterEach(function () {
+        try {
+            fs.unlinkSync('./spec/test_watcher_files/adir/yetAnotherFile.js');
+        } catch (e) {
+            //ignore failure to delete if not exist
+        }
 
+    });
+    describe("file watcher watches files", function () {
         it("should watch a file and call the callback when it changes", function () {
             var error, fileChanged, watcher;
             fileChanged = undefined;
@@ -14,7 +21,7 @@
 
             waitsFor(function () {
                 return fileChanged !== undefined;
-            }, "watch did not get callback after file changed", 2000);
+            }, "watch did not get callback after file changed", 3000);
             //change file
             fs.writeFileSync('./spec/test_watcher_files/afile.js', 'foo', 'UTF-8');
             return runs(function () {
@@ -34,7 +41,7 @@
             //wait for callback
             waitsFor(function () {
                 return fileChanged !== undefined;
-            }, "watch did not get callback after file changed", 2000);
+            }, "watch did not get callback after file changed", 3000);
             //change file
             fs.writeFileSync('./spec/test_watcher_files/adir/anotherFile.txt', 'foo', 'UTF-8');
             return runs(function () {
@@ -49,24 +56,17 @@
             var WATCH_FILE = WATCH_DIR + "/yetAnotherFile.js";
             fileChanged = undefined;
             watcher = require('../lib/watcher');
-            //ensure the file to be created does not exist
-            try {
-                fs.unlinkSync(WATCH_FILE);
-            } catch (e) {
-                //ignore failure to delete if not exist
-            }
             //watch dir
             watcher.watchFiles(WATCH_DIR, function (file, curr, prev) {
                 fileChanged = file;
             });
-
             //create a file
             fs.writeFileSync(WATCH_FILE, 'foo', 'UTF-8');
 
             //wait for callback
             waitsFor(function () {
                 return fileChanged !== undefined;
-            }, "watch did not get callback after file changed", 2000);
+            }, "watch did not get callback after file changed", 3000);
 
 
             runs(function () {
