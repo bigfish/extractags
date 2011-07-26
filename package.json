@@ -2,6 +2,7 @@
   "author": "David Wilhelm <dewilhelm@gmail.com>",
   "name": "extractags",
   "description": "generates ctags from Ext JS 4 source code",
+  "keywords": ["ctags", "extjs"],
   "version": "0.0.1",
   "repository": {
     "type": "git",
