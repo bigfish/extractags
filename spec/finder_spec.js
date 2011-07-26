@@ -16,7 +16,7 @@
             waitsFor(function () {
                 return foundFile;
             }, "find did not find anything after a second", 1000);
-            return runs(function () {
+            runs(function () {
                 expect(fileFound).toBeDefined();
             });
         });
@@ -34,11 +34,11 @@
             waitsFor(function () {
                 return find_finished;
             }, "find did not finish after a second", 1000);
-            return runs(function () {
+            runs(function () {
                 expect(found_files.length).toBeGreaterThan(0);
             });
         });
-        return it("should filter files", function () {
+        it("should filter files", function () {
             var find_finished, finder, found_files;
             finder = require('../lib/finder');
             find_finished = false;
@@ -52,9 +52,32 @@
             waitsFor(function () {
                 return find_finished;
             }, "find did not finish after a second", 1000);
-            return runs(function () {
+            runs(function () {
                 expect(found_files.length).toBeGreaterThan(0);
             });
+        });
+
+        it("should not add double slashes to a directory with a slash on the end", function () {
+            var find_finished, finder, found_files, i;
+            finder = require('../lib/finder');
+            find_finished = false;
+            found_files = [];
+            finder.find('./spec/testfiles/', /\.js$/, function (err, file, finished) {
+                var error;
+                error = err;
+                found_files.push(file);
+                find_finished = finished;
+            });
+            waitsFor(function () {
+                return find_finished;
+            }, "find did not finish after a second", 1000);
+            runs(function () {
+                expect(found_files.length).toBeGreaterThan(0);
+                for (i = 0; i < found_files.length; i++) {
+                    expect(found_files[i].indexOf("//")).toBe(-1);
+                }
+            });
+
         });
     });
 }());
