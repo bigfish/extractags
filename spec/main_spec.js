@@ -1,5 +1,5 @@
 /*jslint node:true white:false*/
-/*global describe it expect waitsFor runs*/
+/*global describe it expect waitsFor waits runs*/
 (function () {
     describe("parse Ext JS 4 source files", function () {
         var main, fileText, fs;
@@ -186,7 +186,20 @@
             });
 
         });
+
 /*
+        it("should watch a dir with lots of files and not fail with error", function () {
+            main = require('../lib/main');
+            //watch dir
+            main.autoGenCTags('./spec/lib', function (file, curr, prev) {});
+
+            waits(1000);
+
+            runs(function () {
+                main.stopWatching();
+            });
+        });
+
         it('should regenerate tags when autoGenCTags is called', function () {
             var parsed, generatedCTags, parsed_file, TAB = "\t";
             main = require('../lib/main');

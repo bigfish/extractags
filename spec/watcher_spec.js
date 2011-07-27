@@ -75,31 +75,23 @@
             });
         });
 
-        it("should watch a dir and call the callback when a file in it deleted", function () {
+      
+        it("should not die with a too many files open error", function () {
             var fileChanged, watcher;
             fileChanged = undefined;
             watcher = require('../lib/watcher');
-            //ensure the file to be created exists
-            fs.writeFileSync('./spec/test_watcher_files/adir/someAnotherFile.txt', 'foo', 'UTF-8');
-            //watch dir
-            watcher.watchFiles('./spec/test_watcher_files/adir', function (file, curr, prev) {
+            //watch dir with lots of files
+            watcher.watchFiles('./spec/lib', function (file, curr, prev) {
                 fileChanged = file;
-            });
-            //delete file
-            waits(1000);
-            runs(function () {
-                fs.unlink('./spec/test_watcher_files/adir/someAnotherFile.txt');
             });
 
             //wait for callback
-            waitsFor(function () {
-                return fileChanged !== undefined;
-            }, "watch did not get callback after file changed", 2000);
+            waits(5000);
 
             runs(function () {
-                expect(fileChanged).toBe('./spec/test_watcher_files/adir/someAnotherFile.txt');
                 watcher.unWatchFiles();
             });
+
         });
     });
 }());
