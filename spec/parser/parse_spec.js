@@ -25,6 +25,7 @@
             parsed_class = extags.parseText(fileText);
             expect(parsed_class.constructorFn.params.length).toBe(0);
         });
+
         it('should parse the constructor function with 1 param', function () {
             fileText = [
                 "Ext.define(\"some.Class\", {"
@@ -38,6 +39,7 @@
             expect(parsed_class.constructorFn.params.length).toBe(1);
             expect(parsed_class.constructorFn.params[0]).toBe('arg');
         });
+
         it('should parse the constructor function with multiple param', function () {
             fileText = [
                 "Ext.define(\"some.Class\", {"
@@ -53,6 +55,7 @@
             expect(parsed_class.constructorFn.params[0]).toBe('arg1');
             expect(parsed_class.constructorFn.params[1]).toBe('arg2');
         });
+
         it('should parse the constructor function with multiple params and exclude comments', function () {
             fileText = [
                 "Ext.define(\"some.Class\", {"
@@ -68,6 +71,7 @@
             expect(parsed_class.constructorFn.params[0]).toBe('arg1');
             expect(parsed_class.constructorFn.params[1]).toBe('arg2');
         });
+
         it('should parse the constructor function with multiple params and exclude multiple comments', function () {
             fileText = [
                 "Ext.define(\"some.Class\", {"
