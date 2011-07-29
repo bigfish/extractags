@@ -182,9 +182,8 @@
                 return parsed;
             }, 1000);
             runs(function () {
-                expect(generatedCTags.length).toBe(181);
+                expect(generatedCTags.length).toBe(163);
             });
-
         });
 
 /*

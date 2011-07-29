@@ -10,7 +10,7 @@ Ext.define("life.Animal", {
     foobar: {
         a: 1,
         b: 2,
-        donNotIndex: function () {
+        doNotIndex: function () {
             this.a = 1 + 1;
         }
     },
