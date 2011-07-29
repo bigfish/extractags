@@ -8,12 +8,12 @@
 
         it('should parse a directory', function () {
             var err, parseComplete, parsedClasses;
-            main = require('../lib/main');
+            main = require('../../lib/main');
             parsedClasses = null;
             err = null;
             parseComplete = false;
-            main.parseDir('./spec/testfiles', function (error, classes) {
-                main = require('../lib/main');
+            main.parseDir('./spec/data/testfiles', function (error, classes) {
+                main = require('../../lib/main');
                 err = error;
                 parsedClasses = classes;
                 parseComplete = true;
@@ -29,10 +29,10 @@
         });
         it('should parse a file', function () {
             var parsed, parsed_data, parsed_file;
-            main = require('../lib/main');
+            main = require('../../lib/main');
             parsed = false;
             parsed_data = null;
-            parsed_file = main.parseFile('./spec/testfiles/Animal.js', function (err, classObj) {
+            parsed_file = main.parseFile('./spec/data/testfiles/Animal.js', function (err, classObj) {
                 if (err) {
                     throw err;
                 }
@@ -49,10 +49,10 @@
 
         it('should output a tag for the class which is defined in a file', function () {
             var parsed, generatedCTags, parsed_file, TAB = "\t";
-            main = require('../lib/main');
+            main = require('../../lib/main');
             parsed = false;
             generatedCTags = null;
-            parsed_file = main.genCTags('./spec/testfiles/Animal.js', function (ctags) {
+            parsed_file = main.genCTags('./spec/data/testfiles/Animal.js', function (ctags) {
                 parsed = true;
                 generatedCTags = ctags;
             });
@@ -60,16 +60,16 @@
                 return parsed;
             });
             runs(function () {
-                expect(generatedCTags[0]).toBe('Animal\t./spec/testfiles/Animal.js\t/^Ext.define("life.Animal", {$/;"\tc');
+                expect(generatedCTags[0]).toBe('Animal\t./spec/data/testfiles/Animal.js\t/^Ext.define("life.Animal", {$/;"\tc');
             });
         });
 
         it('should output no tags when given a file without an Ext.define declaration', function () {
             var parsed, generatedCTags, parsed_file, TAB = "\t";
-            main = require('../lib/main');
+            main = require('../../lib/main');
             parsed = false;
             generatedCTags = null;
-            parsed_file = main.genCTags('./spec/testfiles/dogs/Greyhound.js', function (ctags) {
+            parsed_file = main.genCTags('./spec/data/testfiles/dogs/Greyhound.js', function (ctags) {
                 parsed = true;
                 generatedCTags = ctags;
             });
@@ -84,10 +84,10 @@
         });
         it('should output a tag for the constructor function which is defined in a file', function () {
             var parsed, generatedCTags, parsed_file, TAB = "\t";
-            main = require('../lib/main');
+            main = require('../../lib/main');
             parsed = false;
             generatedCTags = null;
-            parsed_file = main.genCTags('./spec/testfiles/Animal.js', function (ctags) {
+            parsed_file = main.genCTags('./spec/data/testfiles/Animal.js', function (ctags) {
                 parsed = true;
                 generatedCTags = ctags;
             });
@@ -95,16 +95,16 @@
                 return parsed;
             });
             runs(function () {
-                expect(generatedCTags[1]).toBe('Animal\t./spec/testfiles/Animal.js\t/^    constructor: function (name) {$/;"\tf');
+                expect(generatedCTags[1]).toBe('Animal\t./spec/data/testfiles/Animal.js\t/^    constructor: function (name) {$/;"\tf');
             });
         });
 
         it('should output a tag for a method function which is defined in a file', function () {
             var parsed, generatedCTags, parsed_file, TAB = "\t";
-            main = require('../lib/main');
+            main = require('../../lib/main');
             parsed = false;
             generatedCTags = null;
-            parsed_file = main.genCTags('./spec/testfiles/Animal.js', function (ctags) {
+            parsed_file = main.genCTags('./spec/data/testfiles/Animal.js', function (ctags) {
                 parsed = true;
                 generatedCTags = ctags;
             });
@@ -112,16 +112,16 @@
                 return parsed;
             });
             runs(function () {
-                expect(generatedCTags[2]).toBe('breathe\t./spec/testfiles/Animal.js\t/^    breathe: function () {$/;"\tf');
+                expect(generatedCTags[2]).toBe('breathe\t./spec/data/testfiles/Animal.js\t/^    breathe: function () {$/;"\tf');
             });
         });
 
         it('should not output tags for code inside comments', function () {
             var parsed, generatedCTags, parsed_file, TAB = "\t";
-            main = require('../lib/main');
+            main = require('../../lib/main');
             parsed = false;
             generatedCTags = null;
-            parsed_file = main.genCTags('./spec/testfiles/Vegetable.js', function (ctags) {
+            parsed_file = main.genCTags('./spec/data/testfiles/Vegetable.js', function (ctags) {
                 parsed = true;
                 generatedCTags = ctags;
             });
@@ -136,10 +136,10 @@
 
         it('should not output tags for code inside object literals (other than the Ext.define() config object)', function () {
             var parsed, generatedCTags, parsed_file, TAB = "\t";
-            main = require('../lib/main');
+            main = require('../../lib/main');
             parsed = false;
             generatedCTags = null;
-            parsed_file = main.genCTags('./spec/testfiles/Animal.js', function (ctags) {
+            parsed_file = main.genCTags('./spec/data/testfiles/Animal.js', function (ctags) {
                 parsed = true;
                 generatedCTags = ctags;
             });
@@ -153,10 +153,10 @@
 
         it('should output tags for properties of the class defined in the file)', function () {
             var parsed, generatedCTags, parsed_file, TAB = "\t";
-            main = require('../lib/main');
+            main = require('../../lib/main');
             parsed = false;
             generatedCTags = null;
-            parsed_file = main.genCTags('./spec/testfiles/Vegetable.js', function (ctags) {
+            parsed_file = main.genCTags('./spec/data/testfiles/Vegetable.js', function (ctags) {
                 parsed = true;
                 generatedCTags = ctags;
             });
@@ -171,10 +171,10 @@
 
         it("should parse a dir with only dirs in it", function () {
             var parsed, generatedCTags, parsed_file, TAB = "\t";
-            main = require('../lib/main');
+            main = require('../../lib/main');
             parsed = false;
             generatedCTags = null;
-            parsed_file = main.genCTags('./spec/lib', function (ctags) {
+            parsed_file = main.genCTags('./spec/data/lib', function (ctags) {
                 parsed = true;
                 generatedCTags = ctags;
             });
@@ -189,7 +189,7 @@
 
 /*
         it("should watch a dir with lots of files and not fail with error", function () {
-            main = require('../lib/main');
+            main = require('../../lib/main');
             //watch dir
             main.autoGenCTags('./spec/lib', function (file, curr, prev) {});
 
@@ -202,7 +202,7 @@
 
         it('should regenerate tags when autoGenCTags is called', function () {
             var parsed, generatedCTags, parsed_file, TAB = "\t";
-            main = require('../lib/main');
+            main = require('../../lib/main');
             parsed = false;
             generatedCTags = null;
             parsed_file = main.autoGenCTags('./spec/test_watcher_files/adir', function (ctags) {
