@@ -186,7 +186,7 @@
             });
         });
 
-/*
+/* these tests were causing weird async issues
         it("should watch a dir with lots of files and not fail with error", function () {
             main = require('../../lib/main');
             //watch dir
