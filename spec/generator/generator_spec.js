@@ -59,7 +59,6 @@
                 }
             };
             tags = gen.genCTags([classObj]);
-            console.log("TAGS: ", tags);
             expect(tags.indexOf('Awesome\tafile\t/^Ext.define("foo.Awesome", {$/;"\tc')).toNotBe(-1);
             expect(tags.indexOf('doStuff\tafile\t/^someLine$/;"\tf\tclass:foo.Awesome')).toNotBe(-1);
             expect(tags.indexOf('someProp\tafile\t/^aline$/;"\tp\tclass:foo.Awesome')).toNotBe(-1);
