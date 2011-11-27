@@ -2,7 +2,9 @@ A utility for parsing Ext JS 4 source code into CTags format for use in editors.
 
 ###Installation
 
-	sudo npm install -g extractags
+Not yet in public npm repo. So clone this repo, and the cd into it and run:
+
+	sudo npm install -g
 
 ###Usage:
 
